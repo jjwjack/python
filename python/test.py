@@ -23,6 +23,9 @@ for dirpath, dirnames, filenames in os.walk(path):
 	for i in range(len(filenames)):
 		filename = dirpath + "\\" + filenames[i]
 		# print(filename)
-		for line in open(filename):
-			print(line)
-
+		lines = open(filename,'r').readlines()
+		for i in range(len(lines)):
+			# re.sub才能够匹配正则，replace只能替换字符串
+			lines[i] = re.sub(r'\[.*\]','',lines[i])
+			print(lines[i])
+		open(filename,'w').writelines(lines)
